@@ -1,1 +1,21 @@
+.title {
+	font-weight: bold;
+	font-size: 30px;
+}
 
+* {margin:0; padding:0}
+
+html {height:100%;}
+
+#frame {height:100%;}
+
+body {height:100%;}
+
+ul, li {list-style:none;}
+
+.slide {height:100%; overflow:hidden}
+.slide ul {height:100%;}
+.slide li {height:100%;}
+.slide li:nth-child(1) {background:blue;}
+.slide li:nth-child(2) {background:magenta;}
+.slide li:nth-child(3) {background:black;}
