@@ -11,12 +11,25 @@
 		<script src="code.js"></script>
 	</head>
 	<body>
-		<body onload="printDay()">
-		<div id="clock"></div>
-		<h1>
-			청소 뽑기 테스트
-		</h1>
-		<button type="button" class="btn btn-primary">시작</button>
-		<button type="button" class="btn btn-outline-secondary">설정</button>
+		<body onload="printDay();slide();">
+		<div class="slide" id="frame">
+			<ul>
+				<li>
+					<div id="clock"></div>
+					<h1>
+						청소 뽑기 테스트
+					</h1>
+					<button type="button" class="btn btn-primary" onclick="slide(pos++)">시작</button>
+				</li>
+				<li>
+					2
+					<button type="button" class="btn btn-primary" onclick="slide(pos++)">확인</button>
+				</li>
+				<li>
+					3
+					<button type="button" class="btn btn-primary" onclick="slide(pos++)">완료</button>
+				</li>
+			</ul>
+		</div>
 	</body>
 </html>
