@@ -1,8 +1,3 @@
-.title {
-	font-weight: bold;
-	font-size: 30px;
-}
-
 * {margin:0; padding:0}
 
 html {height:100%;}
@@ -16,6 +11,18 @@ ul, li {list-style:none;}
 .slide {height:100%; overflow:hidden}
 .slide ul {height:100%;}
 .slide li {height:100%;}
-.slide li:nth-child(1) {background:blue;}
+/*.slide li:nth-child(1) {background:white;}
 .slide li:nth-child(2) {background:magenta;}
-.slide li:nth-child(3) {background:black;}
+.slide li:nth-child(3) {background:black;}*/
+
+/* 아래부터 스타일 꾸미기 */
+
+#page1-title {font-size:5em; text-align:center;}
+#start-button{font-size:2em; display:block; margin:0 auto;}
+#ok-button{font-size:2em; display:block; margin:0 auto;}
+#done-button{font-size:2em; display:block; margin:0 auto;}
+.page1 {padding-top:10%;}
+.page2 {text-align:center;}
+#range {width:70%; display:inline-block; margin:0 auto;}
+.selectbox {text-align:right;}
+#cleaning-type {width:15%;}
