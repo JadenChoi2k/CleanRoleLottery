@@ -1,4 +1,4 @@
-* {margin:0; padding:0}
+* {margin:0; padding:0;}
 
 html {height:100%;}
 
@@ -17,12 +17,16 @@ ul, li {list-style:none;}
 
 /* 아래부터 스타일 꾸미기 */
 
-#page1-title {font-size:5em; text-align:center;}
-#start-button{font-size:2em; display:block; margin:0 auto;}
-#ok-button{font-size:2em; display:block; margin:0 auto;}
-#done-button{font-size:2em; display:block; margin:0 auto;}
+#page1-title {font-size:600%; text-align:center;}
+#start-button{font-size:300%; display:block; margin:0 auto;}
+#ok-button{font-size:300%; display:block; margin:0 auto;}
+#done-button{font-size:300%; display:block; margin:0 auto;}
 .page1 {padding-top:10%;}
 .page2 {text-align:center;}
-#range {width:70%; display:inline-block; margin:0 auto;}
-.selectbox {text-align:right;}
-#cleaning-type {width:15%;}
+.selectbox {text-align:center; width:70%; margin:0 auto;}
+.rangebox {text-align:center; width:70%; margin:0 auto; padding-top:5%;}
+.range-label {padding:10%;}
+.memberbox {display:flex; width:70%; margin:0 auto;}
+.member {width:100%; background:#3DA7F2; font-size:300%; margin:1%; border-radius:10%; padding:1%;}
+.member label {margin:auto; color:white;}
+.member:after {padding-bottom:100%;}
