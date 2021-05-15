@@ -11,23 +11,49 @@
 		<script src="code.js"></script>
 	</head>
 	<body>
-		<body onload="printDay();slide();">
+		<body onload="printDay();slide();setType();">
 		<div class="slide" id="frame">
 			<ul>
 				<li>
-					<div id="clock"></div>
-					<h1>
-						청소 뽑기 테스트
-					</h1>
-					<button type="button" class="btn btn-primary" onclick="slide(pos++)">시작</button>
+					<div class="page1">
+						<h1 id="page1-title">
+							청소 뽑기
+						</h1>
+						<div id="clock"></div>
+						<button type="button" class="btn btn-primary button" onclick="slide(pos++)" id="start-button">시작</button>
+					</div>
 				</li>
 				<li>
-					2
-					<button type="button" class="btn btn-primary" onclick="slide(pos++)">확인</button>
+					<div class="page2">
+						<h2 id="page2-title">
+							임무분담
+						</h2>
+						<div class="selectbox">
+							<label for="cleaning-type">청소 유형</label>
+							<select class="form-control" id="cleaning-type" onchange="setType();">
+        					<option value="auto" selected>자동</option>
+        					<option value="1">하나</option>
+        					<option value="2">둘</option>
+        					<option value="3">셋</option>
+      					</select>
+						</div>
+						<div class="rangebox">
+							<label for="Claen1" class="range-label">1</label>
+							<input type="range" class="custom-range" id="range" min="0" max="3" id="Clean1">
+							<label for="Claen2" class="range-label">2</label>
+							<input type="range" class="custom-range" id="range" min="0" max="3" id="Clean2">
+							<label for="Claen3" class="range-label">3</label>
+							<input type="range" class="custom-range" id="range" min="0" max="3" id="Clean3">
+							<label for="Claen4" class="range-label">4</label>
+							<input type="range" class="custom-range" id="range" min="0" max="3" id="Clean4">
+							<label for="Claen5" class="range-label">5</label>
+							<input type="range" class="custom-range" id="range" min="0" max="3" id="Clean5">
+						</div>
+						<div><button type="button" class="btn btn-primary button" onclick="slide(pos++)" id="ok-button">확인</button></div>
+					</div>
 				</li>
 				<li>
-					3
-					<button type="button" class="btn btn-primary" onclick="slide(pos++)">완료</button>
+					<button type="button" class="btn btn-primary button" onclick="slide(pos++)" id="done-button">완료</button>
 				</li>
 			</ul>
 		</div>
