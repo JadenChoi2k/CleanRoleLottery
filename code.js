@@ -1,12 +1,13 @@
 const dayOfTheWeek = {1:"월", 2:"화", 3:"수", 4:"목", 5:"금", 6:"토", 0:"일"};
 const member = ["조", "정", "황", "송", "신", "태", "현", "윤", "최", "임"];
 const cleanType = {1:["화장실", "1층복도", "건조장", "생활관", "야스"],
-				   2:["세면실", "2층복도", "연등실도서관", "생활관", "야스"],
-				   3:["???","중앙복도 및 계단", "???", "생활관", "야스"]};
+				   2:["목욕탕","중앙복도 및 계단", "야스", "생활관", "나머지"],
+				   3:["세면실", "2층복도", "연등실도서관", "생활관", "야스"]};
 let cleaning_member = [];
 let cleaning_role = {};
 const memberbox = document.getElementsByClassName("memberbox");
-let pos=0;
+let givenRoles = {};
+//let pos=0;
 
 function printDay()
 {
@@ -14,7 +15,7 @@ function printDay()
 	let currentDate = new Date();
 	clock.innerHTML = `${currentDate.getMonth()+1}월 ${currentDate.getDate()}일 ${dayOfTheWeek[currentDate.getDay()]}요일`;
 	//setTimeout("printDay()",1000);
-	clock.style.cssText = "text-align:center; padding-top:10%; padding-bottom:15%; font-size:2em;";
+	clock.style.cssText = "";
 }
 
 function slide(pos)
@@ -24,10 +25,20 @@ function slide(pos)
 	const len = target.children.length;
 	const height = target.clientHeight;
 	
-	target.style.cssText = `width:calc(100% * ${len});transition:0.6s;`;
-  	Array.from(target.children).forEach(ele => ele.style.cssText = `width:calc(100% / ${len});`);
+	target.style.cssText = `height:calc(100% * ${len});transition:0.6s;`;
+  	Array.from(target.children).forEach(ele => ele.style.cssText = `height:calc(100% / ${len});`);
+	target.style.marginTop = `${-(height / len) * ((pos+1) % len)}px`;
+}
+
+function priSlide()
+{
+	const wrap = document.querySelector(".slide");
+	const target = wrap.children[0];
+	const len = target.children.length;
+	const height = target.clientHeight;
 	
-	target.style.marginTop = `${-(pos+1)%len*height}px`;
+	target.style.cssText = `height:calc(100% * ${len});`;
+  	Array.from(target.children).forEach(ele => ele.style.cssText = `height:calc(100% / ${len});`);
 }
 
 function setType()
@@ -44,6 +55,17 @@ function setType()
 function renewRange(rangeIndex)
 {
 	rangeTable.rows[rangeIndex].cells[2].children[0].innerText = rangeTable.rows[rangeIndex].cells[1].children[0].value;
+	renewWholeRange();
+}
+
+function renewWholeRange()
+{
+	let n = 0;
+	for(let i = 0; i < rangeTable.rows.length - 1; i++)
+	{
+		n += parseInt(rangeTable.rows[i].cells[2].children[0].innerText)
+	}
+	document.getElementById("whole-range").innerText = "선택한 역할의 수 : " + n;
 }
 
 function getTodayType()
@@ -81,6 +103,17 @@ function outToggle(index)
 		selectedMember.children[0].style.color = "white";
 		selectedMember.setAttribute("value", "true");
 	}
+	document.getElementById("now-member").innerText = "현재원 : " + getWholeMember();
+}
+
+function getWholeMember()
+{
+	let n = 0;
+	for(let i = 0; i < member.length; i++)
+	{
+		if(memberbox[0].children[i].getAttribute("value") === "true") n+=1;
+	}
+	return n;
 }
 
 function getCleaningMember()
@@ -96,7 +129,7 @@ function getCleaningMember()
 function getCleaningRole()
 {
 	cleaning_role = {};
-	for(let i = 0; i < rangeTable.rows.length; i++)
+	for(let i = 0; i < rangeTable.rows.length - 1; i++)
 	{
 		cleaning_role[rangeTable.rows[i].cells[0].innerText] = parseInt(rangeTable.rows[i].cells[2].innerText);
 	}
@@ -113,7 +146,7 @@ function giveRoles(cleaning_member, cleaning_role)
 {
 	const roleArray = Object.keys(cleaning_role);
 	let tmp = -1;
-	let givenRoles = {};
+	givenRoles = {};
 	if(isRightNumber(cleaning_member, cleaning_role))
 	{
 		for(let i = 0; i < cleaning_member.length; i++)
@@ -129,7 +162,7 @@ function giveRoles(cleaning_member, cleaning_role)
 				}
 			}
 		}
-		return givenRoles;
+		return true;
 	}
 	else
 	{
@@ -144,6 +177,25 @@ function matchStart()
 	getCleaningRole();
 	let givenRoles = giveRoles(cleaning_member, cleaning_role);
 	if(givenRoles == false) return 0;
-	slide(pos++);
 	console.log(givenRoles);
+}
+
+function showResult(givenRoles)
+{
+	const resultbox = document.getElementsByClassName("resultbox")[0];
+	resultbox.innerText = "";
+	resultbox.style.background = "#FFFFFF";
+	resultbox.style.color = "#000000";
+	for(let i = 0; i < cleaning_member.length; i++)
+	{
+		resultbox.innerText += `${cleaning_member[i]} : ${givenRoles[cleaning_member[i]]}\n`;
+	}
+}
+
+function done()
+{
+	const resultbox = document.getElementsByClassName("resultbox")[0];
+	resultbox.innerText = "결과를 보시려면 클릭하십시오...";
+	resultbox.style.background = "#000000";
+	resultbox.style.color = "#FFFFFF";
 }
