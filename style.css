@@ -23,10 +23,12 @@ ul, li {list-style:none;}
 .page1 {padding-top:10%;}
 .page2 {padding-top:10%;text-align:center;}
 .memberbox {display:flex; flex-wrap:wrap; width:70%; margin:0 auto;}
-.member {width:150%; background:#3DA7F2; font-size:300%; margin:1%; border-radius:10%; }
+.member {width:1.5em; background:#3DA7F2; font-size:3em; margin:1%; border-radius:10%; }
 .selectbox {text-align:center; width:70%; margin:0 auto;}
 .rangebox {text-align:center; width:70%; margin:0 auto; padding-top:5%; padding-bottom:5%;}
 .range-label {padding:10%; padding:2%;}
+.range-label {padding:10%; padding:2%; font-weight:500;}
+.range-num {font-size:2em; font-weight:500;}
 .member label {margin:auto; color:white; cursor:pointer;}
 .member:after {padding-bottom:100%;}
 .resultbox {padding:10% 0; background:black; text-align:center; color:white; font-size:3em;}
@@ -39,13 +41,6 @@ ul, li {list-style:none;}
 	#page1-title {font-size:5em;}
 	.page1 {padding-top:50%;}
 	.page2 {padding-top:0;}
-	.member {width:1.5em; background:#3DA7F2; font-size:3em; margin:1%; border-radius:10%; }
-	.selectbox {text-align:center; width:70%; margin:0 auto;}
-	.rangebox {text-align:center; width:95%; margin:0 auto; padding-top:5%; padding-bottom:5%;}
+	.rangebox {width:95%;}
 	.label-col {padding:3%;}
-	.range-label {padding:10%; padding:2%; font-weight:500;}
-	.range-num {font-size:2em; font-weight:500;}
-	.member label {margin:auto; color:white; cursor:pointer;}
-	.member:after {padding-bottom:100%;}
-	.resultbox {padding:10% 0; background:black; text-align:center; color:white; font-size:3em;}
 }
