@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
 		<link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
@@ -11,7 +12,7 @@
 		<script src="code.js"></script>
 	</head>
 	<body>
-		<body onload="printDay();slide();setType();showMember();">
+		<body onload="printDay();priSlide();setType();showMember();">
 		<div class="slide" id="frame">
 			<ul>
 				<li>
@@ -20,7 +21,7 @@
 							청소 뽑기
 						</h1>
 						<div id="clock"></div>
-						<button type="button" class="btn btn-primary button" onclick="slide(pos++)" id="start-button">시작</button>
+						<button type="button" class="btn btn-primary button" onclick="slide(0)" id="start-button">시작</button>
 					</div>
 				</li>
 				<li>
@@ -29,6 +30,9 @@
 							임무분담
 						</h2>
 						<div class="memberbox">
+						</div>
+						<div id="now-member">
+							현재원 : 10
 						</div>
 						<div class="selectbox">
 							<label for="cleaning-type">청소 유형</label>
@@ -72,14 +76,22 @@
 									<td><input type="range" class="custom-range" min="0" max="3" id="Clean5" onchange="renewRange(4)"></td>
 									<td><label>2</label></td>
 								</tr>
+								<tr>
+									<td  colspan="3" style="text-align:center" id="whole-range"></td>
+								</tr>
 							</tbody>
 							</table>
 						</div>
-						<div><button type="button" class="btn btn-primary button" onclick="matchStart();" id="ok-button">확인</button></div>
+						<div><button type="button" class="btn btn-primary button" onclick="matchStart();slide(1);" id="ok-button">확인</button></div>
 					</div>
 				</li>
 				<li>
-					<button type="button" class="btn btn-primary button" onclick="slide(pos++)" id="done-button">완료</button>
+					<div class="page3">
+						<div class="resultbox" onclick="showResult(givenRoles);">
+							결과를 보시려면 클릭하십시오...
+						</div>
+						<button type="button" class="btn btn-primary button" onclick="done();slide(2);" id="done-button">완료</button>
+					</div>
 				</li>
 			</ul>
 		</div>
