@@ -1,32 +1,54 @@
-* {margin:0; padding:0;}
+* {margin:0; padding:0; box-sizing:border-box;}
 
-html {height:100%;}
+html{height:100%;}
 
-#frame {height:100%;}
-
-body {height:100%;}
+body{height:100%;}
 
 ul, li {list-style:none;}
 
 .slide {height:100%; overflow:hidden}
-.slide ul {height:100%;}
-.slide li {height:100%;}
+/*.slide ul {height:300%;}
+.slide li {height:100%;}*/
 /*.slide li:nth-child(1) {background:white;}
 .slide li:nth-child(2) {background:magenta;}
 .slide li:nth-child(3) {background:black;}*/
 
 /* 아래부터 스타일 꾸미기 */
 
-#page1-title {font-size:600%; text-align:center;}
+#page1-title {font-size:6em; text-align:center;}
+#clock {text-align:center; padding-top:5%; padding-bottom:10%; font-size:2em;}
 #start-button{font-size:300%; display:block; margin:0 auto;}
 #ok-button{font-size:300%; display:block; margin:0 auto;}
 #done-button{font-size:300%; display:block; margin:0 auto;}
 .page1 {padding-top:10%;}
-.page2 {text-align:center;}
-.selectbox {text-align:center; width:70%; margin:0 auto;}
-.rangebox {text-align:center; width:70%; margin:0 auto; padding-top:5%;}
-.range-label {padding:10%;}
+.page2 {padding-top:10%;text-align:center;}
 .memberbox {display:flex; width:70%; margin:0 auto;}
-.member {width:100%; background:#3DA7F2; font-size:300%; margin:1%; border-radius:10%; padding:1%;}
-.member label {margin:auto; color:white;}
+.member {width:100%; background:#3DA7F2; font-size:300%; margin:1%; border-radius:10%; }
+.selectbox {text-align:center; width:70%; margin:0 auto;}
+.rangebox {text-align:center; width:70%; margin:0 auto; padding-top:5%; padding-bottom:5%;}
+.range-label {padding:10%; padding:2%;}
+.member label {margin:auto; color:white; cursor:pointer;}
 .member:after {padding-bottom:100%;}
+.resultbox {padding:10% 0; background:black; text-align:center; color:white; font-size:3em;}
+
+
+/* 미디어 쿼리 */
+
+@media screen and (max-width:900px)
+{
+	#page1-title {font-size:5em; text-align:center;}
+	#clock {text-align:center; padding-top:5%; padding-bottom:10%; font-size:2em;}
+	#start-button{font-size:300%; display:block; margin:0 auto;}
+	#ok-button{font-size:300%; display:block; margin:0 auto;}
+	#done-button{font-size:300%; display:block; margin:0 auto;}
+	.page1 {padding-top:50%;}
+	.page2 {padding-top:10%;text-align:center;}
+	.memberbox {display:flex; width:70%; margin:0 auto;}
+	.member {width:100%; background:#3DA7F2; font-size:300%; margin:1%; border-radius:10%; }
+	.selectbox {text-align:center; width:70%; margin:0 auto;}
+	.rangebox {text-align:center; width:70%; margin:0 auto; padding-top:5%; padding-bottom:5%;}
+	.range-label {padding:10%; padding:2%;}
+	.member label {margin:auto; color:white; cursor:pointer;}
+	.member:after {padding-bottom:100%;}
+	.resultbox {padding:10% 0; background:black; text-align:center; color:white; font-size:3em;}
+}
