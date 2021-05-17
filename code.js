@@ -177,7 +177,7 @@ function matchStart()
 	getCleaningRole();
 	let givenRoles = giveRoles(cleaning_member, cleaning_role);
 	if(givenRoles == false) return 0;
-	console.log(givenRoles);
+	slide(1);
 }
 
 function showResult(givenRoles)
