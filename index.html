@@ -47,8 +47,9 @@
 							<table style="width:100%;">
 								<script>const rangeTable = document.querySelector(".rangebox table");</script>
 								<colgroup>
-									<col style="width:15%;">
-									<col style="width:70%;">
+									<col style="width:25%;" class="range-label-col">
+									<col class="range-col-col">
+									<col class="range-num-col">
 								</colgroup>
 							<tbody>
 								<tr id="Clean1">
@@ -88,9 +89,9 @@
 				<li>
 					<div class="page3">
 						<div class="resultbox" onclick="showResult(givenRoles);">
-							결과를 보시려면 클릭하십시오...
+							결과를 보시려면 누르십시오...
 						</div>
-						<button type="button" class="btn btn-primary button" onclick="done();slide(2);" id="done-button">완료</button>
+						<button type="button" class="btn btn-primary button" onclick="done();slide(2);" id="done-button">되돌아가기</button>
 					</div>
 				</li>
 			</ul>
