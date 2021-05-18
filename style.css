@@ -19,13 +19,14 @@ ul, li {list-style:none;}
 #clock {text-align:center; padding-top:5%; padding-bottom:10%; font-size:2em;}
 #start-button{font-size:300%; display:block; margin:0 auto;}
 #ok-button{font-size:300%; display:block; margin:0 auto;}
-#done-button{font-size:300%; display:block; margin:0 auto; display:none;}
-.page1 {padding-top:10%;}
-.page2 {padding-top:10%;text-align:center;}
+#done-button{font-size:300%; display:block; margin:0 auto; display:none; padding:auto;}
+.page1 {padding-top:10%; height:100%;}
+.page2 {padding-top:10%;text-align:center; height:100%;}
+.page3 {height:100%;}
 .memberbox {display:flex; flex-wrap:wrap; width:70%; margin:0 auto; justify-content:center;}
 .member {width:1.5em; background:#3DA7F2; font-size:3em; margin:1%; border-radius:10%; }
 .selectbox {text-align:center; width:70%; margin:0 auto;}
-.rangebox {text-align:center; width:70%; margin:0 auto; padding-top:5%; padding-bottom:5%;}
+.rangebox {text-align:center; width:70%; margin:0 auto;;}
 .range-label {padding:5%;font-weight:500;}
 .range-label-col{width:20%;}
 .range-col-col {width:70%;}
@@ -33,7 +34,8 @@ ul, li {list-style:none;}
 .range-num {font-size:2em; font-weight:500;}
 .member label {margin:auto; color:white; cursor:pointer;}
 .member:after {padding-bottom:100%;}
-.resultbox {padding:10% 0; background:black; text-align:center; color:white; font-size:3em;}
+.resultbox {background:black; text-align:center; color:white; font-size:3em;}
+.done-button-div {padding:auto;}
 
 
 /* 미디어 쿼리 */
@@ -46,11 +48,11 @@ ul, li {list-style:none;}
 	.page2 {padding-top:auto;padding-bottom:auto;}
 	.memberbox {width:100%;}
 	.member {font-size:2em;}
-	.rangebox {width:95%;}
+	.rangebox {width:95%; padding-top:5%; padding-bottom:5%;}
 	.range-label {padding:0;}
 	.range-num {font-size:1em;}
 	.range-label-col{width:15%;}
-	.range-col-col {padding:0; width: 30%;}
+	.range-col-col {padding:0; width: 50%;}
 	.range-num-col {width:10%;}
 	.resultbox {font-size:2em;}
 }
