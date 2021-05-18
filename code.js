@@ -70,7 +70,10 @@ function renewWholeRange()
 
 function getTodayType()
 {
-	return "1";
+	const stdDate = new Date("May 10, 2021 00:00");
+	const currentDate = new Date();
+	const autoCleanType = Math.floor(Math.floor((currentDate - stdDate)/(60*60*1000*24)) / 14) % 3 + 1;
+	return autoCleanType;
 }
 
 function showMember()
@@ -190,6 +193,7 @@ function showResult(givenRoles)
 	{
 		resultbox.innerText += `${cleaning_member[i]} : ${givenRoles[cleaning_member[i]]}\n`;
 	}
+	document.getElementById("done-button").style.display = "block";
 }
 
 function done()
@@ -198,4 +202,5 @@ function done()
 	resultbox.innerText = "결과를 보시려면 클릭하십시오...";
 	resultbox.style.background = "#000000";
 	resultbox.style.color = "#FFFFFF";
+	document.getElementById("done-button").style.display = "none";
 }
