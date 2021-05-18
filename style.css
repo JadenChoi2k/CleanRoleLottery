@@ -48,11 +48,11 @@ ul, li {list-style:none;}
 	.page2 {padding-top:auto;padding-bottom:auto;}
 	.memberbox {width:100%;}
 	.member {font-size:2em;}
-	.rangebox {width:95%; padding-top:5%; padding-bottom:5%;}
+	.rangebox {width:100%; padding-top:5%; padding-bottom:5%;}
 	.range-label {padding:0;}
 	.range-num {font-size:1em;}
-	.range-label-col{width:15%;}
-	.range-col-col {padding:0; width: 50%;}
+	.range-label-col{width:20%;}
+	.range-col-col {padding:0; width: 70%;}
 	.range-num-col {width:10%;}
 	.resultbox {font-size:2em;}
 }
