@@ -35,6 +35,9 @@ ul, li {list-style:none;}
 .member label {margin:auto; color:white; cursor:pointer;}
 .member:after {padding-bottom:100%;}
 .resultbox {background:black; text-align:center; color:white; font-size:3em;}
+.result-table {width:80%; margin:auto 0; text-align:center;}
+.clean-role-colgroup{width:70%;}
+.clean-mem-colgroup{width:30%;}
 .done-button-div {padding:auto;}
 
 
