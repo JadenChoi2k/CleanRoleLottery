@@ -12,7 +12,7 @@
 		<script src="code.js"></script>
 	</head>
 	<body>
-		<body onload="printDay();priSlide();setType();showMember();">
+		<body onload="printDay();priSlide();setType();setMember();">
 		<div class="slide" id="frame">
 			<ul>
 				<li>
@@ -45,36 +45,35 @@
 						</div>
 						<div class="rangebox">
 							<table style="width:100%;">
-								<script>const rangeTable = document.querySelector(".rangebox table");</script>
 								<colgroup>
 									<col class="range-label-col">
 									<col class="range-col-col">
 									<col class="range-num-col">
 								</colgroup>
 							<tbody>
-								<tr id="Clean1">
-									<td><label for="Claen1" class="range-label"></label></td>
-									<td class="label-col"><input type="range" class="custom-range" min="0" max="3" id="Clean1" onchange="renewRange(0)"></td>
+								<tr class="range-role-row">
+									<td><label for="Clean1" class="range-label"></label></td>
+									<td class="label-col"><input type="range" class="custom-range" min="0" max="3" id="Clean1"></td>
 									<td class="range-num"><label>2</label></td>
 								</tr>
-								<tr>
-									<td><label for="Claen2" class="range-label"></label></td>
-									<td class="label-col"><input type="range" class="custom-range" min="0" max="3" id="Clean2" onchange="renewRange(1)"></td>
+								<tr class="range-role-row">
+									<td><label for="Clean2" class="range-label"></label></td>
+									<td class="label-col"><input type="range" class="custom-range" min="0" max="3" id="Clean2"></td>
 									<td class="range-num"><label>2</label></td>
 								</tr>
-								<tr>
-									<td><label for="Claen3" class="range-label"></label></td>
-									<td class="label-col"><input type="range" class="custom-range" min="0" max="3" id="Clean3" onchange="renewRange(2)"></td>
+								<tr class="range-role-row">
+									<td><label for="Clean3" class="range-label"></label></td>
+									<td class="label-col"><input type="range" class="custom-range" min="0" max="3" id="Clean3"></td>
 									<td class="range-num"><label>2</label></td>
 								</tr>
-								<tr>
-									<td><label for="Claen4" class="range-label"></label></td>
-									<td class="label-col"><input type="range" class="custom-range" min="0" max="3" id="Clean4" onchange="renewRange(3)"></td>
+								<tr class="range-role-row">
+									<td><label for="Clean4" class="range-label"></label></td>
+									<td class="label-col"><input type="range" class="custom-range" min="0" max="3" id="Clean4"></td>
 									<td class="range-num"><label>2</label></td>
 								</tr>
-								<tr>
-									<td><label for="Claen5" class="range-label"></label></td>
-									<td class="label-col"><input type="range" class="custom-range" min="0" max="3" id="Clean5" onchange="renewRange(4)"></td>
+								<tr class="range-role-row">
+									<td><label for="Clean5" class="range-label"></label></td>
+									<td class="label-col"><input type="range" class="custom-range" min="0" max="3" id="Clean5"></td>
 									<td class="range-num"><label>2</label></td>
 								</tr>
 								<tr>
@@ -83,15 +82,53 @@
 							</tbody>
 							</table>
 						</div>
-						<div><button type="button" class="btn btn-primary button" onclick="matchStart();" id="ok-button">확인</button></div>
+						<div><button type="button" class="btn btn-primary button" onclick="match();" id="ok-button">확인</button></div>
 					</div>
 				</li>
 				<li>
 					<div class="page3">
 						<div class="resultbox" onclick="showResult(givenRoles);">
-							결과를 보시려면 누르십시오...
+							<label>결과를 보시려면 누르십시오...</label>
+							<table class="result-table">
+								<colgroup>
+									<col class="clean-role-colgroup">
+									<col span="3" class="clean-mem-colgroup">
+								</colgroup>
+								<tr class="clean-result-row">
+									<td class="clean-role-col"></td>
+									<td class="clean-mem-col"></td>
+									<td class="clean-mem-col"></td>
+									<td class="clean-mem-col"></td>
+								</tr>
+								<tr class="clean-result-row">
+									<td class="clean-role-col"></td>
+									<td class="clean-mem-col"></td>
+									<td class="clean-mem-col"></td>
+									<td class="clean-mem-col"></td>
+								</tr>
+								<tr class="clean-result-row">
+									<td class="clean-role-col"></td>
+									<td class="clean-mem-col"></td>
+									<td class="clean-mem-col"></td>
+									<td class="clean-mem-col"></td>
+								</tr>
+								<tr class="clean-result-row">
+									<td class="clean-role-col"></td>
+									<td class="clean-mem-col"></td>
+									<td class="clean-mem-col"></td>
+									<td class="clean-mem-col"></td>
+								</tr>
+								<tr class="clean-result-row">
+									<td class="clean-role-col"></td>
+									<td class="clean-mem-col"></td>
+									<td class="clean-mem-col"></td>
+									<td class="clean-mem-col"></td>
+								</tr>
+							</table>
 						</div>
-						<button type="button" class="btn btn-primary button" onclick="done();slide(2);" id="done-button">되돌아가기</button>
+						<div class="done-button-div">
+							<button type="button" class="btn btn-primary button" onclick="done();slide(2);" id="done-button">되돌아가기</button>
+						</div>
 					</div>
 				</li>
 			</ul>
