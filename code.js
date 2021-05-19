@@ -5,29 +5,31 @@ const cleanType = {1:["화장실", "1층복도", "건조장", "생활관", "야�
 				   3:["세면실", "2층복도", "연등실도서관", "생활관", "야스"]};
 let cleaning_member = [];
 let cleaning_role = {};
-const memberbox = document.getElementsByClassName("memberbox");
+//const memberbox = document.getElementsByClassName("memberbox");
+const memberbox = $('.memberbox');
 let givenRoles = {};
 //let pos=0;
+const rangeTable = $(".rangebox table");
 
 function printDay()
 {
-	const clock = document.getElementById("clock");
+	const clock = $("#clock");
 	let currentDate = new Date();
-	clock.innerHTML = `${currentDate.getMonth()+1}월 ${currentDate.getDate()}일 ${dayOfTheWeek[currentDate.getDay()]}요일`;
-	//setTimeout("printDay()",1000);
-	clock.style.cssText = "";
+	clock.text(`${currentDate.getMonth()+1}월 ${currentDate.getDate()}일 ${dayOfTheWeek[currentDate.getDay()]}요일`);
 }
 
 function slide(pos)
 {
-	const wrap = document.querySelector(".slide");
-	const target = wrap.children[0];
-	const len = target.children.length;
-	const height = target.clientHeight;
+	const wrap = $(".slide");
+	const target = wrap.children('ul');
+	const len = target.children().length;
+	const height = target.height();
 	
-	target.style.cssText = `height:calc(100% * ${len});transition:0.6s;`;
-  	Array.from(target.children).forEach(ele => ele.style.cssText = `height:calc(100% / ${len});`);
-	target.style.marginTop = `${-(height / len) * ((pos+1) % len)}px`;
+	target.css('height', `calc(100% * ${len})`);
+	target.css('transition', '0.6s');
+	target.children().css('height', `calc(100% / ${len})`);
+  	//Array.from(target.children()).forEach(elem => elem.css('height', `calc(100% / ${len})`));
+	target.css('margin-top', `${-(height / len) * ((pos+1) % len)}px`);
 }
 
 function priSlide()
@@ -42,31 +44,35 @@ function priSlide()
 }
 
 function setType()
-{
-	const range_label = document.getElementsByClassName("range-label");
-	let cleaning_type = document.getElementById("cleaning-type").value;
-	if (cleaning_type == "auto") cleaning_type = getTodayType();
-	for(let i = 0; i < 5; i++)
-	{
-		range_label[i].innerText = cleanType[cleaning_type][i];
-	}
+{	
+	const range_label = $('.range-label');
+	let cleaning_type = $('#cleaning-type option:selected').val();
+	if (cleaning_type === "auto") cleaning_type = getTodayType();
+	range_label.each(function(idx, obj) {obj.innerText = cleanType[cleaning_type][idx]});
 }
 
-function renewRange(rangeIndex)
-{
-	rangeTable.rows[rangeIndex].cells[2].children[0].innerText = rangeTable.rows[rangeIndex].cells[1].children[0].value;
-	renewWholeRange();
-}
-
-function renewWholeRange()
-{
-	let n = 0;
-	for(let i = 0; i < rangeTable.rows.length - 1; i++)
-	{
-		n += parseInt(rangeTable.rows[i].cells[2].children[0].innerText)
-	}
-	document.getElementById("whole-range").innerText = "선택한 역할의 수 : " + n;
-}
+$(document).ready(function(){ //range-num 값 갱신
+	$(".rangebox table").find("input[type='range']").change(
+		function (e) 
+		{
+			const preVal = parseInt($(this).closest('tr').find('.range-num').text()); //이전값
+			const nowVal = parseInt(this.value); //현재값
+			const diff = nowVal - preVal; //변화값
+			$(this).closest('tr').find('.range-num label').text(this.value);
+			if(!$("#whole-range").data('wholeNum')) //만약 정의되어있지 않다면
+			{
+				let n = 0;
+				$(".rangebox table").find('.range-num').each(function(idx, obj){n += parseInt($(obj).text())});
+				$("#whole-range").data('wholeNum', n);
+			}
+			else
+			{
+				$("#whole-range").data('wholeNum', $("#whole-range").data('wholeNum') + diff);
+			}
+			$("#whole-range").text("선택한 역할의 수 : " + $("#whole-range").data('wholeNum'));
+		}
+	);
+})
 
 function getTodayType()
 {
@@ -76,80 +82,73 @@ function getTodayType()
 	return autoCleanType;
 }
 
-function showMember()
+function setMember()
 {
 	for(let i = 0; i < member.length; i++)
 	{
-		let member_elem = document.createElement("div");
-		member_elem.appendChild(document.createElement("label"));
-		member_elem.children[0].innerText = member[i];
-		member_elem.setAttribute("class", "member");
-		member_elem.setAttribute("id", `member[${i}]`);
-		member_elem.setAttribute("onclick", `outToggle(${i});`);
-		member_elem.setAttribute("value", "true"); //청소를 하는가?
-		memberbox[0].appendChild(member_elem);
+		let mem = $(`<div class='member' id='member[${i}]'><label>${member[i]}</label></div>`);
+		mem.data('joined', true);
+		mem.appendTo('.memberbox');
 	}
 }
 
-function outToggle(index)
-{
-	const selectedMember = memberbox[0].children[index];
-	if(selectedMember.getAttribute("value") === "true")
-	{
-		selectedMember.style.background = "#3DA7F25F";
-		selectedMember.children[0].style.color = "373F6A";
-		selectedMember.setAttribute("value", "false");
-	}
-	else
-	{
-		selectedMember.style.background = "#3DA7F2";
-		selectedMember.children[0].style.color = "white";
-		selectedMember.setAttribute("value", "true");
-	}
-	document.getElementById("now-member").innerText = "현재원 : " + getWholeMember();
-}
-
-function getWholeMember()
-{
-	let n = 0;
-	for(let i = 0; i < member.length; i++)
-	{
-		if(memberbox[0].children[i].getAttribute("value") === "true") n+=1;
-	}
-	return n;
-}
+$(document).ready(function(){ //memBtn 구현
+	$('.member').click(function(e) {
+		const preNum = $("#now-member").data('memNum');
+		if(!preNum)
+		{
+			let n = 0;
+			$(".member").each(function(idx, obj){if($(obj).data('joined')) n += 1 })
+			$("#now-member").data('memNum', n); //정의되어 있지 않다면
+		}
+		if($(this).data('joined'))
+		{
+			$(this).css('background', '#3DA7F25F');
+			$(this).css('color', '373F6A');
+			$(this).data('joined', false);
+			$("#now-member").data('memNum', $("#now-member").data('memNum') - 1);
+		}
+		else
+		{
+			$(this).css('background', '#3DA7F2');
+			$(this).css('color', 'white');
+			$(this).data('joined', true);
+			$("#now-member").data('memNum', $("#now-member").data('memNum') + 1);
+		}
+		
+		$("#now-member").text("현재원 : " + $("#now-member").data('memNum'));
+	})
+})
 
 function getCleaningMember()
 {
 	cleaning_member.length = 0;
-	const members = memberbox[0].children
-	for(let i = 0; i < member.length; i++)
-	{
-		if(members[i].getAttribute("value") === "true") cleaning_member.push(members[i].innerText);
-	}
+	const members = $(".member");
+	$(".member").each(function(idx, obj) {
+		if($(obj).data('joined')) cleaning_member.push($(obj).text())
+	})
 }
 
 function getCleaningRole()
 {
 	cleaning_role = {};
-	for(let i = 0; i < rangeTable.rows.length - 1; i++)
-	{
-		cleaning_role[rangeTable.rows[i].cells[0].innerText] = parseInt(rangeTable.rows[i].cells[2].innerText);
-	}
+	$(".rangebox table .range-role-row").each(function(idx, obj){
+		cleaning_role[$(obj).find(".range-label").text()] = 
+			parseInt($(obj).find(".range-num").text());
+	})
 }
 
-function isRightNumber(cleaning_member, cleaning_role) //역할 개수가 일치하면 true 반환
+function isRightNumber(cleaning_member, cleaning_role) //현재원과 역할 개수가 일치하면 true 반환
 {
-	let n = 0;
-	Object.values(cleaning_role).forEach((elem) => n += elem);
-	return n == cleaning_member.length;
+	return $("#whole-range").data('wholeNum') == $("#now-member").data('memNum');
 }
 
-function giveRoles(cleaning_member, cleaning_role)
+function giveRoles()
 {
 	const roleArray = Object.keys(cleaning_role);
 	let tmp = -1;
 	givenRoles = {};
+	roleArray.forEach((elem) => givenRoles[elem] = []);
 	if(isRightNumber(cleaning_member, cleaning_role))
 	{
 		for(let i = 0; i < cleaning_member.length; i++)
@@ -159,7 +158,7 @@ function giveRoles(cleaning_member, cleaning_role)
 				tmp = Math.floor(Math.random() * roleArray.length);
 				if(cleaning_role[roleArray[tmp]] > 0)
 				{
-					givenRoles[cleaning_member[i]] = roleArray[tmp];
+					givenRoles[roleArray[tmp]].push(cleaning_member[i]);
 					cleaning_role[roleArray[tmp]] -= 1;
 					break;
 				}
@@ -174,7 +173,7 @@ function giveRoles(cleaning_member, cleaning_role)
 	}
 }
 
-function matchStart()
+function match()
 {
 	getCleaningMember();
 	getCleaningRole();
@@ -183,24 +182,49 @@ function matchStart()
 	slide(1);
 }
 
+
 function showResult(givenRoles)
 {
-	const resultbox = document.getElementsByClassName("resultbox")[0];
-	resultbox.innerText = "";
-	resultbox.style.background = "#FFFFFF";
-	resultbox.style.color = "#000000";
-	for(let i = 0; i < cleaning_member.length; i++)
-	{
-		resultbox.innerText += `${cleaning_member[i]} : ${givenRoles[cleaning_member[i]]}\n`;
-	}
-	document.getElementById("done-button").style.display = "block";
+	if($(".resultbox").data("opened") == true) return;
+	$(".resultbox").data("opend", true);
+	const resultbox = $(".resultbox");
+	resultbox.children("label").text("");
+	resultbox.css("background", "white");
+	resultbox.css("color", "black");
+	//for(let i = 0; i < cleaning_member.length; i++)
+	//{
+	//	resultbox.text(resultbox.text() + `${cleaning_member[i]} : ${givenRoles[cleaning_member[i]]}\n`);
+	//}
+	$("#done-button").css("display", "block");
+	$(".result-table").css("display", "block");
+	
+	const roleArray = Object.keys(cleaning_role);
+	$(".result-table .clean-role-col").each(function(idx, obj){
+		obj.innerText = roleArray[idx];
+	})
+	
+	$(".clean-result-row").each(function(idx, obj){
+		let role_mem = givenRoles[$(obj).children(".clean-role-col").text()]
+		$(obj).children(".clean-mem-col").each(function(_idx, _obj){
+			if(role_mem[_idx]) $("<div><label>"+role_mem[_idx]+"</label></div>").appendTo($(_obj));
+		})
+	})
 }
 
 function done()
 {
-	const resultbox = document.getElementsByClassName("resultbox")[0];
-	resultbox.innerText = "결과를 보시려면 클릭하십시오...";
-	resultbox.style.background = "#000000";
-	resultbox.style.color = "#FFFFFF";
-	document.getElementById("done-button").style.display = "none";
+	const resultbox = $(".resultbox");
+	resultbox.children("label").text("결과를 보시려면 누르십시오...");
+	resultbox.css("background", "black");
+	resultbox.css("color", "white");
+	$("#done-button").css("display", "none");
+	$(".result-table").css("display", "none");
+	$(".resultbox").data("opend", false);
+	
+	$(".clean-result-row").each(function(idx, obj){ // 테이블 초기화
+		let role_mem = givenRoles[$(obj).children(".clean-role-col").text()]
+		$(obj).children(".clean-mem-col").each(function(_idx, _obj){
+			$(_obj).text("");
+		})
+	})
 }
