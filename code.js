@@ -149,6 +149,18 @@ function giveRoles()
 	let tmp = -1;
 	givenRoles = {};
 	roleArray.forEach((elem) => givenRoles[elem] = []);
+	
+	//멤버 배열 섞기
+	for(let i = 0; i <= Math.floor(Math.random() * cleaning_member.length); i++)
+	{
+		let idx1 = Math.floor(Math.random() * cleaning_member.length);
+		let idx2 = Math.floor(Math.random() * cleaning_member.length);
+		while(idx1 == idx2)
+			idx2 = Math.floor(Math.random() * cleaning_member.length);
+		swapMember(idx1, idx2);
+	}
+	
+	//멤버에게 역할 부여하기
 	if(isRightNumber(cleaning_member, cleaning_role))
 	{
 		for(let i = 0; i < cleaning_member.length; i++)
@@ -171,6 +183,13 @@ function giveRoles()
 		alert("역할 개수와 멤버 수가 일치하지 않습니다!");
 		return false;
 	}
+}
+
+function swapMember(idx1, idx2)
+{
+	let _tmp = cleaning_member[idx1];
+	cleaning_member[idx1] = cleaning_member[idx2];
+	cleaning_member[idx2] = _tmp;
 }
 
 function match()
