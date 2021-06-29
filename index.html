@@ -12,7 +12,7 @@
 		<script src="code.js"></script>
 	</head>
 	<body>
-		<body onload="printDay();priSlide();setType();setMember();">
+		<body onload="printDay();preSlide();setType();setMember();">
 		<div class="slide" id="frame">
 			<ul>
 				<li>
@@ -87,13 +87,9 @@
 				</li>
 				<li>
 					<div class="page3">
-						<div class="resultbox" onclick="showResult(givenRoles);">
+						<div class="resultbox" onclick="showResult(givenRoles); $('.resultbox').removeAttr('onclick');">
 							<label>결과를 보시려면 누르십시오...</label>
 							<table class="result-table">
-								<colgroup>
-									<col class="clean-role-colgroup">
-									<col span="3" class="clean-mem-colgroup">
-								</colgroup>
 								<tr class="clean-result-row">
 									<td class="clean-role-col"></td>
 									<td class="clean-mem-col"></td>
@@ -127,7 +123,7 @@
 							</table>
 						</div>
 						<div class="done-button-div">
-							<button type="button" class="btn btn-primary button" onclick="done();slide(2);" id="done-button">되돌아가기</button>
+							<button type="button" class="btn btn-primary button" onclick="done();slide(2); $('.resultbox').attr('onclick', 'showResult(givenRoles); $(\'.resultbox\').removeAttr(\'onclick\');')" id="done-button">되돌아가기</button>
 						</div>
 					</div>
 				</li>
