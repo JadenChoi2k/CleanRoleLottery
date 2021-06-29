@@ -32,7 +32,7 @@ function slide(pos)
 	target.css('margin-top', `${-(height / len) * ((pos+1) % len)}px`);
 }
 
-function priSlide()
+function preSlide()
 {
 	const wrap = document.querySelector(".slide");
 	const target = wrap.children[0];
@@ -51,15 +51,24 @@ function setType()
 	range_label.each(function(idx, obj) {obj.innerText = cleanType[cleaning_type][idx]});
 }
 
-$(document).ready(function(){ //range-num 값 갱신
+// range-num 값 갱신
+$(document).ready(function(){
+	// 초기화
+	let n = 0;
+	$(".rangebox table").find('.range-num').each(function(idx, obj){n += parseInt($(obj).text())});
+				$("#whole-range").data('wholeNum', n);
 	$(".rangebox table").find("input[type='range']").change(
 		function (e) 
 		{
-			const preVal = parseInt($(this).closest('tr').find('.range-num').text()); //이전값
-			const nowVal = parseInt(this.value); //현재값
-			const diff = nowVal - preVal; //변화값
+			// 이전값
+			const preVal = parseInt($(this).closest('tr').find('.range-num').text());
+			// 현재값
+			const nowVal = parseInt(this.value);
+			// 변화값
+			const diff = nowVal - preVal;
 			$(this).closest('tr').find('.range-num label').text(this.value);
-			if(!$("#whole-range").data('wholeNum')) //만약 정의되어있지 않다면
+			// 만약 정의되어있지 않다면
+			if(!$("#whole-range").data('wholeNum'))
 			{
 				let n = 0;
 				$(".rangebox table").find('.range-num').each(function(idx, obj){n += parseInt($(obj).text())});
@@ -92,14 +101,20 @@ function setMember()
 	}
 }
 
-$(document).ready(function(){ //memBtn 구현
+//memBtn 구현
+$(document).ready(function(){
+	let n = 0;
+	$(".member").each(function(idx, obj){if($(obj).data('joined')) n += 1 })
+	$("#now-member").data('memNum', n);
+	
 	$('.member').click(function(e) {
 		const preNum = $("#now-member").data('memNum');
+		//정의되어 있지 않다면
 		if(!preNum)
 		{
 			let n = 0;
 			$(".member").each(function(idx, obj){if($(obj).data('joined')) n += 1 })
-			$("#now-member").data('memNum', n); //정의되어 있지 않다면
+			$("#now-member").data('memNum', n);
 		}
 		if($(this).data('joined'))
 		{
