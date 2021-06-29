@@ -41,6 +41,8 @@ ul, li {list-style:none;}
 .clean-role-col{display:inline-block; width:54%;}
 .clean-mem-col{display:inline-block; width:13%;}
 .done-button-div {padding:auto;}
+#result-member {width:1.5em; font-size:1em;}
+#result-member label {cursor:auto;}
 
 
 /* 미디어 쿼리 */
