@@ -240,7 +240,7 @@ function showResult(givenRoles)
 	$(".clean-result-row").each(function(idx, obj){
 		let role_mem = givenRoles[$(obj).children(".clean-role-col").text()]
 		$(obj).children(".clean-mem-col").each(function(_idx, _obj){
-			if(role_mem[_idx]) $("<div><label>"+role_mem[_idx]+"</label></div>").appendTo($(_obj));
+			if(role_mem[_idx]) $(`<div class="member" id="result-member"><label>${role_mem[_idx]}</label></div>`).appendTo($(_obj));
 		})
 	})
 }
