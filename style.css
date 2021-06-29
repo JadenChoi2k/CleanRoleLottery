@@ -7,6 +7,8 @@ body{height:100%;}
 ul, li {list-style:none;}
 
 .slide {height:100%; overflow:hidden}
+
+.resultbox tbody, .resultbox tbody tr {display:block; width:100%;}
 /*.slide ul {height:300%;}
 .slide li {height:100%;}*/
 /*.slide li:nth-child(1) {background:white;}
@@ -35,9 +37,9 @@ ul, li {list-style:none;}
 .member label {margin:auto; color:white; cursor:pointer;}
 .member:after {padding-bottom:100%;}
 .resultbox {background:black; text-align:center; color:white; font-size:3em;}
-.result-table {width:80%; margin:auto 0; text-align:center;}
-.clean-role-colgroup{width:70%;}
-.clean-mem-colgroup{width:30%;}
+.result-table {width:100%; margin:auto; text-align:center;}
+.clean-role-col{display:inline-block; width:54%;}
+.clean-mem-col{display:inline-block; width:13%;}
 .done-button-div {padding:auto;}
 
 
